@@ -10,6 +10,7 @@ namespace SerializationForSummerSchool
         public string LastName { get; set; }
         public string EmployeeId { get; set; }
         public Address Address { get; set; }
+        public Dictionary<string, int> Test { get; set; }
     }
 
     public class Address

@@ -1,5 +1,6 @@
 ﻿using SerializationForSummerSchool;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
@@ -33,8 +34,14 @@ namespace SerializationDEMO
                 FirstName = "Anna",
                 LastName = "Hakobyan",
                 Address = new Address { Country = "Armenia", State = "Yerevan", ZipCode = "895578" },
-                EmployeeId = "189811211"
+                EmployeeId = "189811211",
+                Test = new Dictionary<string, int>()
             };
+            empDetails.Test.Add("7", 9);
+            empDetails.Test.Add("2", 3);
+            empDetails.Test.Add("8", 9);
+            empDetails.Test.Add("12", 56);
+
             SaveAsJsonFormat(empDetails, jsonFileName);
             Employee fakeEmployeFromJSON = LoadFromJSONFile(jsonFileName);
             PrintEmployee(fakeEmployeFromJSON);
@@ -53,7 +60,7 @@ namespace SerializationDEMO
             Console.WriteLine();
             Console.WriteLine("=> Saved car in binary format!");
         }
-        
+
         static JamesBondCar LoadFromBinaryFile(string fileName)
         {
             Console.WriteLine("=> Deserialization: Load a car from binary format!");
@@ -118,6 +125,12 @@ namespace SerializationDEMO
             Console.WriteLine($" Employee.Address.ZipCode: {e.Address.ZipCode}");
             Console.WriteLine($" Employee.Address.State: {e.Address.State}");
             Console.WriteLine($" Employee.Address.Country: {e.Address.Country}");
+
+            Console.Write($" Employee.Test: ");
+            foreach (var test in e.Test)
+            {
+                Console.Write($"Key: {test.Key}, Value: {test.Value}; ");
+            }
         }
     }
 }
